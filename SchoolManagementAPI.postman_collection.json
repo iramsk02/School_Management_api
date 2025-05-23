@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "School Management API",
+    "_postman_id": "12345678-abcd-1234-abcd-1234567890ab",
+    "description": "Collection for Add School and List Schools APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Greenwood High\",\n  \"address\": \"123 Maple Street\",\n  \"latitude\": 12.9716,\n  \"longitude\": 77.5946\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/addSchool",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["addSchool"]
+        }
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "status": "Created",
+          "code": 201,
+          "body": "{\"message\":\"School added successfully.\"}",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        {
+          "name": "Validation Error",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\"message\":\"All fields are required.\"}",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/listSchools?latitude=12.9716&longitude=77.5946",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["listSchools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "12.9716"
+            },
+            {
+              "key": "longitude",
+              "value": "77.5946"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "status": "OK",
+          "code": 200,
+          "body": "[\n  {\n    \"id\": 1,\n    \"name\": \"Greenwood High\",\n    \"address\": \"123 Maple Street\",\n    \"latitude\": 12.9716,\n    \"longitude\": 77.5946,\n    \"distance\": 0\n  }\n]",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        {
+          "name": "Validation Error",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\"message\":\"Latitude and longitude are required.\"}",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
